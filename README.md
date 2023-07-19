@@ -1,3 +1,3 @@
 # nti_preproccessing
 
-codes done through the nti course
+some of the codes that i've gone through the nti.ai course
