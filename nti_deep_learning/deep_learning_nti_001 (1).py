@@ -29,7 +29,9 @@ x.shape
 model= Sequential()
 model.add(Dense(12,input_dim=8,activation='relu'))
 model.add(Dense(8,activation='relu'))
-model.add(Dense(1,activation='relu'))
+model.add(Dense(8,activation='relu'))
+model.add(Dense(8,activation='relu'))
+model.add(Dense(1,activation='sigmoid'))
 
 #compile
 model.compile(loss='binary_crossentropy',optimizer='adam',metrics='accuracy')
@@ -59,7 +61,7 @@ loss = history.history['loss']
 
 # Plot the accuracy
 plt.plot(loss, 'g', label='Training loss')
-plt.title('Training Accuracy')
+plt.title('Training loss')
 plt.xlabel('Epoch')
 plt.ylabel('Accuracy')
 plt.legend()
@@ -91,10 +93,15 @@ print(x.head())
 model1= Sequential()
 model1.add(Dense(12,input_dim=8,activation='relu'))
 model1.add(Dense(8,activation='relu'))
-model1.add(Dense(1,activation='relu'))
+model.add(Dense(8,activation='relu'))
+model.add(Dense(8,activation='relu'))
+model1.add(Dense(1,activation='sigmoid'))
 
 #compile
 model1.compile(loss='binary_crossentropy',optimizer='adam',metrics='accuracy')
 
 x_train1,x_test1,y_train1,y_test1=train_test_split(x,y,test_size=.30,random_state=0)
 history1=model1.fit(x_train1,y_train1,epochs=150,batch_size=10)
+
+#evaluate the model
+scores = model1.evaluate(x_test,y_test)
