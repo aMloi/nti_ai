@@ -1,0 +1,28 @@
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn.preprocessing import LabelEncoder
+
+# Load the dataset (replace 'your_dataset.csv' with the actual filename)
+df = pd.read_csv('your_dataset.csv')
+
+# Task 1: Factorize the YearsExp feature and convert it to numbers in a new column
+label_encoder = LabelEncoder()
+df['YearsExp_encoded'] = label_encoder.fit_transform(df['YearsExp'])
+
+# Task 2: Apply K-means for job title and companies
+# Create separate dataframes for job title and companies
+job_title_df = df[['JobTitle']]
+companies_df = df[['Company']]
+
+# Apply K-means clustering to job title
+num_clusters_job_title = 3  # Set the number of clusters as per your requirement
+kmeans_job_title = KMeans(n_clusters=num_clusters_job_title)
+df['JobTitle_cluster'] = kmeans_job_title.fit_predict(job_title_df)
+
+# Apply K-means clustering to companies
+num_clusters_companies = 4  # Set the number of clusters as per your requirement
+kmeans_companies = KMeans(n_clusters=num_clusters_companies)
+df['Company_cluster'] = kmeans_companies.fit_predict(companies_df)
+
+# Display the updated DataFrame with the new columns
+print(df)
